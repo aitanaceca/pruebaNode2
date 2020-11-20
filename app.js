@@ -2,7 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const User = require('./userModel');
+
+const userRoutes = require('./routes/userRoutes');
 
 
 // express app
@@ -28,80 +29,11 @@ app.use((req, res, next) => {
     res.locals.path = req.path;
     next();
 });
+app.use('/views', express.static('views'));
 
 
-// View
-app.get('/user/signup', (req, res) => {
-    res.render('userView', { title: 'Sign up' });
-});
-
-
-// mongo save data
-app.post('/users', (req, res) => {
-    User.find({ email: req.body.email })
-        .exec()
-        .then(user => {
-            if (user.length >= 1) {
-                console.log('Mail exists');
-                res.redirect('/user/signup')
-            } else {
-                const user = new User({
-                    _id: new mongoose.Types.ObjectId(),
-                    email: req.body.email,
-                    password: req.body.password
-                });
-                user.save()
-                    .then(result => {
-                        console.log('User created');
-                        res.redirect('/user/signup');
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    });
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        });
-});
-
-
-// app.post con encriptado
-/*app.post('/users', (req, res) => {
-    User.find({ email: req.body.email })
-        .exec()
-        .then(user => {
-            if (user.length >= 1) {
-                console.log('Mail exists');
-                res.redirect('/user/signup')
-            } else {
-                bcrypt.hash(req.body.password, 10, (err, hash) => {
-                    if (err) {
-                        return res.status(500).json({
-                            error: err
-                        });
-                    } else {
-                        const user = new User({
-                            _id: new mongoose.Types.ObjectId(),
-                            email: req.body.email,
-                            password: hash
-                        });
-                        user
-                            .save()
-                            .then(result => {
-                                res.redirect('/user/signup')
-                            })
-                            .catch(err => {
-                                console.log(err);
-                            });
-                    }
-                });
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        });
-})*/
+//Routes
+app.use('/user', userRoutes);
 
 
 // 404 page
