@@ -1,9 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-
 const userRoutes = require('./routes/userRoutes');
+const database = require('./database/databaseInit');
+const { connection } = require('./database/databaseInit');
 
 
 // express app
@@ -14,12 +13,20 @@ const app = express();
 app.set('view engine', 'ejs');
 
 
-// MongoDB
-const dbURI = "mongodb+srv://admin1:admin1234@nodetuts.x3mus.mongodb.net/prueba?retryWrites=true&w=majority";
+// Database connect
 
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(result => app.listen(3000))
-    .catch(err => console.log(err));
+var connect = database.connection;
+connect.connected();
+//connect.insertData({ email: 'hola@hola.com', password: '1234' }, { fields: ['email', 'password'] }); //-> funciona
+//connect.updateData({ email: 'a@x.com' }, { where: { id: 3 } }); //-> funciona
+//connect.findData(); -> funciona
+//connectfindDataById(4); -> funciona
+//connect.deleteData({ where: { id: 5 } }); -> funciona
+//connect.deleteAllData(); -> funciona
+
+
+// listener
+app.listen(3000);
 
 
 // middleware
@@ -40,3 +47,7 @@ app.use('/user', userRoutes);
 app.use((req, res) => {
     res.status(404).render('404', { title: '404' });
 });
+
+module.exports = {
+    app
+}

@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const User = require("../models/userModel");
+const User = require("../models/userModelMongodb");
+const mongodbConnector = require("../database/mongodbConnector");
+const mysqlConnector = require("../database/mysqlConnector");
+
 
 // View
 const get_user = (req, res) => {
@@ -9,8 +12,35 @@ const get_user = (req, res) => {
 };
 
 
+/*function new_user (req, res) {
+    var apar = 0;
+    mongodbConnector.findData({ email: req.body.email });
+    apar = mongodbConnector.countData({ email: req.body.email });
+    console.log(apar);
+    if (apar >= 1) {
+        console.log('Mail exists');
+    } else {
+        mongodbConnector.insertData(req.body.email, req.body.password);
+        res.redirect('/user/signup');
+    }
+}*/
+
+function new_user (req, res) {
+    var apar = 0;
+    mysqlConnector.findData({ email: req.body.email });
+    apar = mysqlConnector.countData({ email: req.body.email });
+    console.log(apar);
+    if (apar >= 1) {
+        console.log('Mail exists');
+    } else {
+        mysqlConnector.insertData({ email: req.body.email, password: req.body.password }, {fields: ["email", "password"]});
+        res.redirect('/user/signup');
+    }
+}
+
+
 // Mongo save data
-const new_user = (req, res) => {
+/*const new_user = (req, res) => {
     User.find({ email: req.body.email })
         .exec()
         .then(user => {
@@ -36,7 +66,7 @@ const new_user = (req, res) => {
         .catch(err => {
             console.log(err);
         });
-}
+}*/
 
 
 // app.post con encriptado
@@ -75,6 +105,7 @@ const new_user = (req, res) => {
             console.log(err);
         });
 };*/
+
 
 module.exports = {
     get_user,
