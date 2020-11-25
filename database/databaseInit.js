@@ -2,7 +2,7 @@ const mysqlDatabase = require('./mysqlConnector');
 const mongoDatabase = require('./mongodbConnector');
 
 
-const connection = mysqlDatabase;
+const connection = mongoDatabase;
 
 
 module.exports = {

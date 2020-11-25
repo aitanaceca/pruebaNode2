@@ -12,7 +12,7 @@ const get_user = (req, res) => {
 };
 
 
-/*function new_user (req, res) {
+function new_user (req, res) {
     var apar = 0;
     mongodbConnector.findData({ email: req.body.email });
     apar = mongodbConnector.countData({ email: req.body.email });
@@ -23,9 +23,9 @@ const get_user = (req, res) => {
         mongodbConnector.insertData(req.body.email, req.body.password);
         res.redirect('/user/signup');
     }
-}*/
+};
 
-function new_user (req, res) {
+/*function new_user (req, res) {
     var apar = 0;
     mysqlConnector.findData({ email: req.body.email });
     apar = mysqlConnector.countData({ email: req.body.email });
@@ -37,7 +37,7 @@ function new_user (req, res) {
         mysqlConnector.insertData({ email: req.body.email, password: req.body.password }, {fields: ["email", "password"]});
         res.redirect('/user/signup');
     }
-}
+};*/
 
 
 // Mongo save data
@@ -67,7 +67,7 @@ function new_user (req, res) {
         .catch(err => {
             console.log(err);
         });
-}*/
+};*/
 
 
 // app.post con encriptado

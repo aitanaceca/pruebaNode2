@@ -62,7 +62,7 @@ function findData(data) {
             if (user.length >= 1){
                 console.log('User found');
             } else {
-                console.log('User created');
+                console.log('User doesnt exist');
             }
         })
         .catch(err => {
@@ -73,7 +73,18 @@ function findData(data) {
 
 // ver datos concretos .findById()
 function findDataByField(data) {
-    User.findById(data);
+    User.findById(data)
+        .exec()
+        .then(user => {
+            if (user.length >= 1){
+                console.log('User found');
+            } else {
+                console.log('User not found');
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });;
 };
 
 
