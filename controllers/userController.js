@@ -32,6 +32,7 @@ function new_user (req, res) {
     console.log(apar);
     if (apar >= 1) {
         console.log('Mail exists');
+        res.json('Mail exist');
     } else {
         mysqlConnector.insertData({ email: req.body.email, password: req.body.password }, {fields: ["email", "password"]});
         res.redirect('/user/signup');

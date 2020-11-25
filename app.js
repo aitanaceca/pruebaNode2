@@ -2,7 +2,6 @@ const express = require('express');
 const morgan = require('morgan');
 const userRoutes = require('./routes/userRoutes');
 const database = require('./database/databaseInit');
-const { connection } = require('./database/databaseInit');
 
 
 // express app
@@ -16,13 +15,13 @@ app.set('view engine', 'ejs');
 // Database connect
 
 var connect = database.connection;
-connect.connected();
+//connect.connected();
 //connect.insertData({ email: 'hola@hola.com', password: '1234' }, { fields: ['email', 'password'] }); //-> funciona
 //connect.updateData({ email: 'a@x.com' }, { where: { id: 3 } }); //-> funciona
-//connect.findData(); -> funciona
-//connectfindDataById(4); -> funciona
-//connect.deleteData({ where: { id: 5 } }); -> funciona
-//connect.deleteAllData(); -> funciona
+//connect.findData(); //-> funciona
+//connect.findDataById(4); //-> funciona
+//connect.deleteData({ where: { id: 5 } }); //-> funciona
+//connect.deleteAllData(); //-> funciona
 
 
 // listener

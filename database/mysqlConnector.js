@@ -1,7 +1,11 @@
 const Sequelize = require('sequelize');
 
 
+const userModel = require('../models/userModelMysql');
+
+
 // conectar a bbdd con sequelize
+
 const sequelize = new Sequelize('prueba', 'root', 'admin1234', {
     host: 'localhost',
     dialect: 'mysql',
@@ -12,13 +16,17 @@ const sequelize = new Sequelize('prueba', 'root', 'admin1234', {
         idle: 10000
     }
 });
-const userModel = require('../models/userModelMysql');
+
+
 const User = userModel(sequelize, Sequelize);
 
-sequelize.sync({ force: false })
-    .then(() => {
-        console.log('\nDatabase table is created!')
-    });
+
+function connected(){
+    sequelize.sync({ force: false })
+            .then(() => {
+                console.log('Database table is created!')
+            });
+};
 
 
 // insertar tabla
@@ -84,6 +92,7 @@ function deleteAllData (){
 
 
 module.exports = {
+    connected,
     insertData,
     updateData,
     findData,
