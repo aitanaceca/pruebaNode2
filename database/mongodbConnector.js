@@ -99,5 +99,6 @@ module.exports = {
     insertData,
     countData,
     findData,
-    findDataByField
+    findDataByField,
+    deleteData
 }
