@@ -21,11 +21,11 @@ function connected (){
 
 
 // insertar datos .save()
-function insertData(em, pass){
+function insertData(values, fields){
     const user = new User({
         _id: new mongoose.Types.ObjectId(),
-        email: em,
-        password: pass
+        email: values.email,
+        password: values.password
     });
     user.save()
         .then(result => {

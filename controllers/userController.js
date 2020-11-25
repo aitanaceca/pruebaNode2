@@ -2,8 +2,9 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const User = require("../models/userModelMongodb");
-const mongodbConnector = require("../database/mongodbConnector");
-const mysqlConnector = require("../database/mysqlConnector");
+//const mongodbConnector = require("../database/mongodbConnector");
+//const mysqlConnector = require("../database/mysqlConnector");
+const databaseConnector = require("../database/databaseInit");
 
 
 // View
@@ -14,16 +15,17 @@ const get_user = (req, res) => {
 
 function new_user (req, res) {
     var apar = 0;
-    mongodbConnector.findData({ email: req.body.email });
-    apar = mongodbConnector.countData({ email: req.body.email });
+    databaseConnector.find({ email: req.body.email });
+    apar = databaseConnector.countData({ email: req.body.email });
     console.log(apar);
     if (apar >= 1) {
         console.log('Mail exists');
     } else {
-        mongodbConnector.insertData(req.body.email, req.body.password);
+        databaseConnector.insert({ email: req.body.email, password: req.body.password}, {fields: ["email", "password"]});
         res.redirect('/user/signup');
     }
 };
+
 
 /*function new_user (req, res) {
     var apar = 0;

@@ -13,8 +13,7 @@ app.set('view engine', 'ejs');
 
 
 // Database connect
-
-var connect = database.connection;
+database.connect();
 //connect.connected();
 //connect.insertData({ email: 'hola@hola.com', password: '1234' }, { fields: ['email', 'password'] }); //-> funciona
 //connect.updateData({ email: 'a@x.com' }, { where: { id: 3 } }); //-> funciona
