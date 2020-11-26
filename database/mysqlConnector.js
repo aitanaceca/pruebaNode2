@@ -35,15 +35,21 @@ function connected(){
 
 // insertar datos
 function insertData (data, fields){
-    User.create(data, fields);
+    User.create(data, fields)
+        .then( console.log('Created') )
+        .catch(err => {
+            console.log(err);
+        });
 };
 
 
 // modificar datos concretos
-function updateData (valor, condicion){
-    User.update(valor, condicion)
-        .then((self) => {
-            return self;
+function updateData (value, condition){
+    User.update(value, condition)
+        .then((user) => {
+            console.log(user);
+            console.log('Updated')
+            return user;
         })
         .catch(err => {
             console.log(err);
@@ -54,17 +60,28 @@ function updateData (valor, condicion){
 // ver todos los datos
 function findData (){
     User.findAll({raw:true})
-        .then(function(users) {
+        .then(users => {
             console.log(users);
+        })
+        .catch(err => {
+            console.log(err);
         });
 };
 
 
 // ver datos concretos
-function findDataById (id){
-    User.findByPk(id)
-        .then(function(users){
-            console.log(users);
+function findDataByField (data){
+    User.findOne(data)
+        .then(users => {
+            if (user.length >= 1){
+                console.log('Found');
+                console.log(user);
+            } else {
+                console.log('Not found');
+            }
+        })
+        .catch(err => {
+            console.log(err);
         });
 };
 
@@ -72,14 +89,22 @@ function findDataById (id){
 // ver y contar datos
 function countData (search){
     User.findAndCountAll(search)
-        .then(function(users){
+        .then(users => {
             console.log(users);
+            return users.count;
+        })
+        .catch(err => {
+            console.log(err);
         });
 };
 
 // eliminar datos
 function deleteData (condicion){
-    User.destroy(condicion);
+    User.destroy(condicion)
+        .then( console.log('Deleted') )
+        .catch(err => {
+            console.log(err);
+        });
 };
 
 
@@ -87,7 +112,11 @@ function deleteData (condicion){
 function deleteAllData (){
     User.destroy({
         truncate: true
-    });
+    })
+        .then(console.log('All deleted'))
+        .catch(err => {
+            console.log(err);
+        });
 };
 
 
@@ -96,7 +125,7 @@ module.exports = {
     insertData,
     updateData,
     findData,
-    findDataById,
+    findDataByField,
     countData,
     deleteData,
     deleteAllData,

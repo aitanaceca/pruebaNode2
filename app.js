@@ -14,13 +14,13 @@ app.set('view engine', 'ejs');
 
 // Database connect
 database.connect();
-//connect.connected();
-//connect.insertData({ email: 'hola@hola.com', password: '1234' }, { fields: ['email', 'password'] }); //-> funciona
-//connect.updateData({ email: 'a@x.com' }, { where: { id: 3 } }); //-> funciona
-//connect.findData(); //-> funciona
-//connect.findDataById(4); //-> funciona
-//connect.deleteData({ where: { id: 5 } }); //-> funciona
-//connect.deleteAllData(); //-> funciona
+//database.insertData({ email: 'hola@hola.com', password: '1234' }, { fields: ['email', 'password'] }); //-> funciona
+//database.update({ email: 'aitana@jeje.com' }, { _id: '5fbf71f569eddc56f032be2f' } ); //-> funciona
+//database.find(); //-> funciona
+//database.findById({ _id:  '5fbf71f569eddc56f032be2f' }); //-> funciona
+//database.countData({ email: 'holu@jeje.com' });
+//database.remove(  {where:{ email: 'holuu@jeje.com' } }); //-> funciona
+//database.removeAll(); //-> funciona
 
 
 // listener

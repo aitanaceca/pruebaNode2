@@ -15,7 +15,7 @@ const get_user = (req, res) => {
 
 function new_user (req, res) {
     var apar = 0;
-    databaseConnector.find({ email: req.body.email });
+    databaseConnector.findByField({ email: req.body.email });
     apar = databaseConnector.countData({ email: req.body.email });
     console.log(apar);
     if (apar >= 1) {

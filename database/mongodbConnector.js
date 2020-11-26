@@ -18,9 +18,18 @@ function connected (){
 
 
 // insertar colección
+function createCollection(name){
+    User.createCollection(name)
+        .then(result => {
+            console.log('Created');
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
 
 
-// insertar datos .save()
+// insertar datos
 function insertData(values, fields){
     const user = new User({
         _id: new mongoose.Types.ObjectId(),
@@ -29,7 +38,7 @@ function insertData(values, fields){
     });
     user.save()
         .then(result => {
-            console.log('User created');
+            console.log('Created');
         })
         .catch(err => {
             console.log(err);
@@ -37,7 +46,51 @@ function insertData(values, fields){
 };
 
 
-// modificar datos concretos .update()
+// modificar datos concretos
+function updateData (value, condition){
+    User.findOneAndUpdate(condition, value)
+        .exec()
+        .then((user) => {
+            console.log(user);
+            console.log('Updated')
+            return user;
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
+
+
+// ver datos
+function findData() {
+    User.find()
+        .exec()
+        .then(user => {
+            console.log(user);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
+
+
+// ver datos concretos
+function findDataByField(data) {
+    User.find(data)
+        .exec()
+        .then(user => {
+            if (user.length >= 1){
+                console.log('Found');
+                console.log(user);
+            } else {
+                console.log('Not found');
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });;
+};
+
 
 // contar apariciones
 function countData(data) {
@@ -54,51 +107,33 @@ function countData(data) {
 };
 
 
-// ver datos .find()
-function findData(data) {
-    User.find(data)
-        .exec()
-        .then(user => {
-            if (user.length >= 1){
-                console.log('User found');
-            } else {
-                console.log('User doesnt exist');
-            }
-        })
+// eliminar datos
+function deleteData(data){
+    User.deleteOne(data)
+        .then( console.log('Deleted') )
         .catch(err => {
             console.log(err);
         });
 };
 
 
-// ver datos concretos .findById()
-function findDataByField(data) {
-    User.findById(data)
-        .exec()
-        .then(user => {
-            if (user.length >= 1){
-                console.log('User found');
-            } else {
-                console.log('User not found');
-            }
-        })
+// eliminar todos los datos
+function deleteAllData(){
+    User.deleteMany()
+        .then(console.log('Deleted'))
         .catch(err => {
             console.log(err);
-        });;
-};
-
-
-// eliminar datos .remove()
-function deleteData(data){
-    User.remove(data);
-};
+        });
+}
 
 
 module.exports = {
     connected,
     insertData,
-    countData,
+    updateData,
     findData,
     findDataByField,
-    deleteData
+    countData,
+    deleteData,
+    deleteAllData
 }
