@@ -5,7 +5,7 @@ const User = require('../models/userModelMongodb');
 
 
 // conectar a bbdd
-const dbURI = "mongodb+srv://admin1:admin1234@nodetuts.x3mus.mongodb.net/prueba?retryWrites=true&w=majority";
+const dbURI = 'mongodb://yop:danone@localhost:27017';
 function connected (){
     mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
         .then(
