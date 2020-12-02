@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 database.connect();
 //database.insertData({ email: 'hola@hola.com', password: '1234' }, { fields: ['email', 'password'] }); //-> funciona
 //database.update({ email: 'aitana@jeje.com' }, { _id: '5fbf71f569eddc56f032be2f' } ); //-> funciona
-database.find(); //-> funciona
+//database.find(); //-> funciona
 //database.findByField({ password:  'aitana' }); //-> funciona
 //database.countData({ email: 'holu@jeje.com' });
 //database.remove(  {where:{ email: 'holuu@jeje.com' } }); //-> funciona
