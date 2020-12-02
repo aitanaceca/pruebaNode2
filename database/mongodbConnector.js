@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
+const { create } = require('../models/userModelMongodb');
 
 
 const User = require('../models/userModelMongodb');
+const { changeTime } = require('./changeTime');
 
 
 // conectar a bbdd
+//const dbURI = 'mongodb+srv://admin1:admin1234@nodetuts.x3mus.mongodb.net/prueba?retryWrites=true&w=majority'
 const dbURI = 'mongodb://yop:danone@localhost:27017';
 function connected (){
     mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -66,7 +69,15 @@ function findData() {
     User.find()
         .exec()
         .then(user => {
-            console.log(user);
+            for(let x = 0; x < user.length; x++){
+                console.log({
+                    'id: ': user[x]["_id"],
+                    'email: ': user[x]["email"],
+                    'password: ': user[x]["password"],
+                    'createdAt: ': changeTime(user[x]["createdAt"]),
+                    'updatedAt: ': changeTime(user[x]["updatedAt"])
+                });
+            }
         })
         .catch(err => {
             console.log(err);
@@ -81,7 +92,15 @@ function findDataByField(data) {
         .then(user => {
             if (user.length >= 1){
                 console.log('Found');
-                console.log(user);
+                for(let x = 0; x < user.length; x++){
+                    console.log({
+                        'id: ': user[x]["_id"],
+                        'email: ': user[x]["email"],
+                        'password: ': user[x]["password"],
+                        'createdAt: ': changeTime(user[x]["createdAt"]),
+                        'updatedAt: ': changeTime(user[x]["updatedAt"])
+                    });
+                }
             } else {
                 console.log('Not found');
             }
