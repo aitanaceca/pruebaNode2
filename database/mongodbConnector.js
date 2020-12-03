@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { create } = require('../models/userModelMongodb');
 
 
 const User = require('../models/userModelMongodb');
