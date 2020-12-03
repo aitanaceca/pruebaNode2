@@ -147,6 +147,7 @@ function deleteAllData(){
 
 
 module.exports = {
+    createCollection,
     connected,
     insertData,
     updateData,
