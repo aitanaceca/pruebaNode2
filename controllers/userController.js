@@ -1,9 +1,5 @@
-const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const User = require("../models/userModelMongodb");
-//const mongodbConnector = require("../database/mongodbConnector");
-//const mysqlConnector = require("../database/mysqlConnector");
 const databaseConnector = require("../database/databaseInit");
 
 
